@@ -15,12 +15,12 @@ const routes = [
     label: "Home",
   },
   {
-    href: "/about",
-    label: "About",
+    href: "/dashboard",
+    label: "Dashboard",
   },
   {
-    href: "/blog",
-    label: "Blog",
+    href: "/about",
+    label: "About",
   },
   {
     href: "/contact",
@@ -44,11 +44,11 @@ export default function Header() {
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
   return (
-    <header className="sm:flex sm:justify-between py-3 px-4 border-b">
+    <header className="sm:flex sm:justify-between py-3  border-b h-[90px]  flex items-center">
       <Container>
-        <div className="relative px-4 sm:px-6 lg:px-8 flex h-[8vh] items-center justify-between w-full">
+        <div className="relative px-4   flex  items-center justify-between w-full">
           <div className="flex items-center">
-            <Sheet>
+            {/* <Sheet>
               <SheetTrigger>
                 <Menu className="h-6 w-6 md:hidden" />
               </SheetTrigger>
@@ -65,12 +65,12 @@ export default function Header() {
                   ))}
                 </nav>
               </SheetContent>
-            </Sheet>
-            <Link href={`/`} className="ml-4 lg:ml-0">
+            </Sheet> */}
+            <Link href={`/`} className="">
               <h1 className="text-xl font-bold">Daily Post</h1>
             </Link>
           </div>
-          <nav className="mx-6 flex items-center space-x-4 lg:space-x-6 hidden md:block">
+          <nav className="mx-6 md:flex items-center space-x-4 lg:space-x-6 hidden ">
             {routes.map((route, i) => (
               <Button asChild variant={"ghost"} key={i}>
                 <Link
@@ -98,7 +98,7 @@ export default function Header() {
             <Button
               variant={"ghost"}
               size={"icon"}
-              className="mr-2"
+              className="mr-2 hidden md:flex"
               aria-label="Menu"
               onClick={() => {
                 setTheme(theme === "dark" ? "light" : "dark");
@@ -108,7 +108,28 @@ export default function Header() {
               <Moon className="absolute rotate-90 scale-0 transition-all dark:-rotate-0 dark:scale-100" />
               <span className="sr-only">Menu</span>
             </Button>
-            <ProfileButton />
+
+            <div className="hidden md:block">
+              <ProfileButton />
+            </div>
+            <Sheet>
+              <SheetTrigger>
+                <Menu className="h-6 w-6 md:hidden" />
+              </SheetTrigger>
+              <SheetContent side={"left"} className="w-[300px] sm:w-[400px]">
+                <nav className="flex flex-col gap-4 ">
+                  {routes.map((route, i) => (
+                    <Link
+                      href={route.href}
+                      className="block px-2 py-1 text-lg "
+                      key={i}
+                    >
+                      {route.label}
+                    </Link>
+                  ))}
+                </nav>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </Container>
