@@ -8,6 +8,8 @@ import ProfileButton from "./ui/ProfileButton";
 import { useTheme } from "next-themes";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useSession, signIn } from "next-auth/react";
 
 const routes = [
   {
@@ -29,20 +31,15 @@ const routes = [
 ];
 
 export default function Header() {
-  // const [mounted, setMounted] = useState(false);
-  // useEffect(() => {
-  //   setMounted(true);
-  // }, []);
-
-  // if (!mounted) {
-  //   return null;
-  // }
+  const pathname = usePathname();
+  const { data: session, status } = useSession();
 
   // wait for theme to be loaded before rendering the header to avoid flash of light theme on dark theme
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
+
   return (
     <header className="sm:flex sm:justify-between py-3  border-b h-[90px]  flex items-center">
       <Container>
@@ -75,7 +72,11 @@ export default function Header() {
               <Button asChild variant={"ghost"} key={i}>
                 <Link
                   href={route.href}
-                  className="text-sm font-medium transition-colors"
+                  className={`text-sm font-medium transition-colors duration-200 hover:text-primary/80 active:text-primary/80 ${
+                    pathname === route.href
+                      ? "text-primary  outline outline-1  "
+                      : ""
+                  } `}
                 >
                   {route.label}
                 </Link>
@@ -83,17 +84,6 @@ export default function Header() {
             ))}
           </nav>
           <div className="flex items-center">
-            {/* Avatar from shadcn on clicking avatar show menu */}
-            {/* <Button
-              variant={"ghost"}
-              size={"icon"}
-              className="mr-2"
-              aria-label="Menu"
-            >
-              <Menu className="h-6 w-6" />
-              <span className="sr-only">Menu</span>
-            </Button> */}
-
             {/* Theme Toggle */}
             <Button
               variant={"ghost"}
@@ -109,19 +99,33 @@ export default function Header() {
               <span className="sr-only">Menu</span>
             </Button>
 
-            <div className="hidden md:block">
-              <ProfileButton />
-            </div>
+            {status === "authenticated" && (
+              <div className="hidden md:block">
+                <ProfileButton />
+              </div>
+            )}
+
+            {status === "unauthenticated" && (
+              <Button variant={"outline"} size={"sm"} onClick={() => signIn()}>
+                Sign In
+              </Button>
+            )}
+
             <Sheet>
               <SheetTrigger>
                 <Menu className="h-6 w-6 md:hidden" />
               </SheetTrigger>
               <SheetContent side={"left"} className="w-[300px] sm:w-[400px]">
-                <nav className="flex flex-col gap-4 ">
+                <nav className="flex flex-col gap-4 pt-7">
                   {routes.map((route, i) => (
                     <Link
                       href={route.href}
-                      className="block px-2 py-1 text-lg "
+                      // className="block px-2 py-1 text-lg "
+                      className={`block px-2 py-1 text-lg font-medium transition-colors duration-200 hover:text-primary/80 active:text-primary/80 ${
+                        pathname === route.href
+                          ? "text-primary  outline outline-1  "
+                          : ""
+                      } `}
                       key={i}
                     >
                       {route.label}

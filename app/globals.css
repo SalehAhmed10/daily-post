@@ -15,6 +15,17 @@
   
 }
 
+
+/* create .active tailwind*/
+.active{
+
+}
+
+.not-active{
+  /* change style for not active btn */
+
+}
+
 /* @layer base {
   :root {
     --background: 0 0% 100%;

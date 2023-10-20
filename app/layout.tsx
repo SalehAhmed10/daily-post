@@ -5,6 +5,7 @@ import ThemeProvider from "@/context/ThemeProvider";
 import Header from "@/components/Header";
 import { switchThemeDuration } from "@/constants/page";
 import Footer from "@/components/Footer";
+import { NextAuthProvider } from "../components/Providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,16 +24,18 @@ export default function RootLayout({
       <body
         className={`${inter.className} min-h-screen flex flex-col transition-colors ${switchThemeDuration}`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem={true}
-        >
-          <Header />
-          <main className="flex-1 ">{children}</main>
+        <NextAuthProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem={true}
+          >
+            <Header />
+            <main className="flex-1 ">{children}</main>
 
-          <Footer />
-        </ThemeProvider>
+            <Footer />
+          </ThemeProvider>
+        </NextAuthProvider>
       </body>
     </html>
   );
