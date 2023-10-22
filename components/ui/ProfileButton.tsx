@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useSession, signOut } from "next-auth/react";
+import Link from "next/link";
 
 export default function ProfileButton() {
   const { data: session, status } = useSession();
@@ -29,6 +30,11 @@ export default function ProfileButton() {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="cursor-pointer">Profile</DropdownMenuItem>
+        <Link href="/create-post">
+          <DropdownMenuItem className="cursor-pointer">
+            Create Post
+          </DropdownMenuItem>
+        </Link>
         <DropdownMenuItem className="cursor-pointer" onClick={() => signOut()}>
           Sign Out
         </DropdownMenuItem>

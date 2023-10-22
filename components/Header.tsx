@@ -3,13 +3,13 @@
 import Link from "next/link";
 import Container from "./ui/container";
 import { Button } from "./ui/button";
-import { Menu, Moon, Sun } from "lucide-react";
+import { BiMoon, BiSun, BiMenu } from "react-icons/bi";
 import ProfileButton from "./ui/ProfileButton";
 import { useTheme } from "next-themes";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { useSession, signIn } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 const routes = [
   {
@@ -94,8 +94,10 @@ export default function Header() {
                 setTheme(theme === "dark" ? "light" : "dark");
               }}
             >
-              <Sun className="h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute rotate-90 scale-0 transition-all dark:-rotate-0 dark:scale-100" />
+              {/* <Sun className="h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" /> */}
+              <BiMoon className="h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+
+              <BiSun className="h-6 w-6 absolute rotate-90 scale-0 transition-all dark:-rotate-0 dark:scale-100" />
               <span className="sr-only">Menu</span>
             </Button>
 
@@ -106,14 +108,14 @@ export default function Header() {
             )}
 
             {status === "unauthenticated" && (
-              <Button variant={"outline"} size={"sm"} onClick={() => signIn()}>
-                Sign In
+              <Button variant={"outline"} size={"sm"} asChild>
+                <Link href={`/signin`}>Sign In</Link>
               </Button>
             )}
 
             <Sheet>
               <SheetTrigger>
-                <Menu className="h-6 w-6 md:hidden" />
+                <BiMenu className="h-6 w-6 md:hidden" />
               </SheetTrigger>
               <SheetContent side={"left"} className="w-[300px] sm:w-[400px]">
                 <nav className="flex flex-col gap-4 pt-7">
