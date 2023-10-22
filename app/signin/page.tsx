@@ -3,11 +3,13 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 
-export default function page() {
-  const session = getServerSession(authOptions);
+export default async function page() {
+  const session = await getServerSession(authOptions);
 
-  // if session exists, redirect to dashboard page instead of showing sign in page again
-  if (session) redirect("/dashboard");
+  // check if session is null or not and redirect to dashboard
+  if (session) {
+    redirect("/dashboard");
+  }
 
   return <SignIn />;
 }
