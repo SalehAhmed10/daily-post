@@ -10,6 +10,5 @@ export default async function page() {
   if (session) {
     redirect("/dashboard");
   }
-
   return <SignIn />;
 }
