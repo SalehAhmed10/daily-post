@@ -1,2 +1,2 @@
 export const switchThemeDuration: string =
-  "duration-1000  ease-in-out transition-all ";
+  "duration-200  ease-in-out transition-all ";

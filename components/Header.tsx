@@ -108,7 +108,12 @@ export default function Header() {
             )}
 
             {status === "unauthenticated" && (
-              <Button variant={"outline"} size={"sm"} asChild>
+              <Button
+                variant={"outline"}
+                size={"sm"}
+                asChild
+                className="hidden md:flex"
+              >
                 <Link href={`/signin`}>Sign In</Link>
               </Button>
             )}
@@ -117,23 +122,56 @@ export default function Header() {
               <SheetTrigger>
                 <BiMenu className="h-6 w-6 md:hidden" />
               </SheetTrigger>
-              <SheetContent side={"left"} className="w-[300px] sm:w-[400px]">
-                <nav className="flex flex-col gap-4 pt-7">
-                  {routes.map((route, i) => (
-                    <Link
-                      href={route.href}
-                      // className="block px-2 py-1 text-lg "
-                      className={`block px-2 py-1 text-lg font-medium transition-colors duration-200 hover:text-primary/80 active:text-primary/80 ${
-                        pathname === route.href
-                          ? "text-primary  outline outline-1  "
-                          : ""
-                      } `}
-                      key={i}
-                    >
-                      {route.label}
-                    </Link>
-                  ))}
-                </nav>
+              <SheetContent side={"left"} className="w-[300px] sm:w-[400px] ">
+                <div className="flex flex-col gap-4 pt-2 h-[100%]">
+                  <nav className="flex flex-col gap-4 pt-7">
+                    {routes.map((route, i) => (
+                      <Link
+                        href={route.href}
+                        // className="block px-2 py-1 text-lg "
+                        className={`block px-2 py-1 text-lg font-medium transition-colors duration-200 hover:text-primary/80 active:text-primary/80 ${
+                          pathname === route.href
+                            ? "text-primary  outline outline-1  "
+                            : ""
+                        } `}
+                        key={i}
+                      >
+                        {route.label}
+                      </Link>
+                    ))}
+                  </nav>
+
+                  <div className="h-[100%] flex flex-col justify-end ">
+                    <div className="flex justify-between items-center gap-2">
+                      {status === "authenticated" && <ProfileButton />}
+                      {status === "unauthenticated" && (
+                        <Button
+                          variant={"outline"}
+                          size={"lg"}
+                          asChild
+                          className="w-full"
+                        >
+                          <Link href={`/signin`}>Sign In</Link>
+                        </Button>
+                      )}
+                      <Button
+                        variant={"secondary"}
+                        size={"sm"}
+                        className=" items-center h-[100%]   md:hidden"
+                        aria-label="Menu"
+                        onClick={() => {
+                          setTheme(theme === "dark" ? "light" : "dark");
+                        }}
+                      >
+                        {/* <Sun className="h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" /> */}
+                        <BiMoon className="h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+
+                        <BiSun className="h-6 w-6 absolute rotate-90 scale-0 transition-all dark:-rotate-0 dark:scale-100" />
+                        <span className="sr-only">Menu</span>
+                      </Button>
+                    </div>
+                  </div>
+                </div>
               </SheetContent>
             </Sheet>
           </div>
