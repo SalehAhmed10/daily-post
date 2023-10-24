@@ -20,7 +20,7 @@ export const postsData: PostData[] = [
     datePublished: "2021-08-09",
     category: "Politics",
     links: ["https://www.google.com"],
-    thumbnail: "https://source.unsplash.com/random/1920x1080",
+    // thumbnail: "https://source.unsplash.com/random/1920x1080",
   },
   {
     id: "2",
@@ -76,6 +76,6 @@ export const postsData: PostData[] = [
     datePublished: "2021-08-09",
     category: "Politics",
     links: ["https://www.google.com"],
-    thumbnail: "https://source.unsplash.com/random/1920x1080",
+    // thumbnail: "https://source.unsplash.com/random/1920x1080",
   },
 ];

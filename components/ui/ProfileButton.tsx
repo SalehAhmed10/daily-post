@@ -13,6 +13,8 @@ import Link from "next/link";
 
 export default function ProfileButton() {
   const { data: session, status } = useSession();
+  const productionUrlRedirect = "https://daily-post-app.vercel.app/auth/signin";
+  const developmentUrlRedirect = "http://localhost:3000/auth/signin";
 
   return (
     <DropdownMenu>
@@ -35,7 +37,17 @@ export default function ProfileButton() {
             Create Post
           </DropdownMenuItem>
         </Link>
-        <DropdownMenuItem className="cursor-pointer" onClick={() => signOut()}>
+        <DropdownMenuItem
+          className="cursor-pointer"
+          onClick={() =>
+            signOut({
+              callbackUrl:
+                process.env.NODE_ENV === "production"
+                  ? `${productionUrlRedirect}`
+                  : `${developmentUrlRedirect}`,
+            })
+          }
+        >
           Sign Out
         </DropdownMenuItem>
       </DropdownMenuContent>

@@ -10,6 +10,7 @@ function SignIn() {
   const productionUrlRedirect = "https://daily-post-app.vercel.app/dashboard";
   const developmentUrlRedirect = "http://localhost:3000/dashboard";
 
+  console.log("process.env.NODE_ENV", process.env.NODE_ENV);
   return (
     <div className="main-tag flex flex-col justify-center items-center gap-5">
       <Button
@@ -31,7 +32,7 @@ function SignIn() {
         <span className="text-[20px]">
           <FcGoogle />
         </span>
-        Sign In Google
+        Google Sign-In
       </Button>
 
       <Button
@@ -51,7 +52,7 @@ function SignIn() {
         <span className="text-[20px]">
           <FaGithub />
         </span>
-        Sign In Github
+        Github Sign-In
       </Button>
     </div>
   );

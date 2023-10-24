@@ -114,7 +114,7 @@ export default function Header() {
                 asChild
                 className="hidden md:flex"
               >
-                <Link href={`/signin`}>Sign In</Link>
+                <Link href={`/auth/signin`}>Sign In</Link>
               </Button>
             )}
 
@@ -151,7 +151,7 @@ export default function Header() {
                           asChild
                           className="w-full"
                         >
-                          <Link href={`/signin`}>Sign In</Link>
+                          <Link href={`/auth/signin`}>Sign In</Link>
                         </Button>
                       )}
                       <Button

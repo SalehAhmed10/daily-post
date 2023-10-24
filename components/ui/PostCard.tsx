@@ -3,6 +3,7 @@ import { postsData } from "@/constants/demo-data";
 import { Card, CardContent, CardFooter } from "./card";
 import Image from "next/image";
 import Link from "next/link";
+import image404 from "@/public/image-404.jpg";
 
 interface PostCardProps {
   post: PostData;
@@ -17,10 +18,12 @@ const PostCard: React.FC<PostCardProps> = ({ post }) => {
         <CardContent className="pt-4">
           <div className="aspect-square relative bg-foreground/5 dark:bg-background rounded-lg">
             <Image
-              src={post.thumbnail ? post.thumbnail : ""}
-              alt=""
-              fill
+              src={post.thumbnail ? post.thumbnail : image404}
+              alt={post.title as string}
+              sizes="fill"
               className="aspect-square object-cover rounded-lg transition-all duration-300 hover:scale-105"
+              width={1000}
+              height={1000}
             />
           </div>
         </CardContent>

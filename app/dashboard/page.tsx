@@ -9,7 +9,7 @@ export default async function page() {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    redirect("/signin");
+    redirect("/auth/signin");
   }
 
   return (

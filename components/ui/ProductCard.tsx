@@ -19,8 +19,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <div className="aspect-square relative bg-foreground/5 dark:bg-background rounded-lg">
             <Image
               src={product.images?.[0]}
-              alt=""
-              fill
+              alt={product.name as string}
+              width={1000}
+              height={1000}
+              sizes="fill"
               className="aspect-square object-cover rounded-lg transition-all duration-300 hover:scale-105"
             />
           </div>
