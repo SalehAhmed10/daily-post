@@ -35,10 +35,10 @@ export default function Header() {
   const { data: session, status } = useSession();
 
   // wait for theme to be loaded before rendering the header to avoid flash of light theme on dark theme
-  const [mounted, setMounted] = useState(false);
+  // const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
-  useEffect(() => setMounted(true), []);
-  if (!mounted) return null;
+  // useEffect(() => setMounted(true), []);
+  // if (!mounted) return null;
 
   return (
     <header className="sm:flex sm:justify-between py-3  border-b h-[90px]  flex items-center">
