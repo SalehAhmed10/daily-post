@@ -15,7 +15,7 @@ export default async function page() {
   return (
     <div>
       <div className="flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8">
-        <PostList post={postsData} />
+        {/* <PostList post={postsData} /> */}
       </div>
     </div>
   );

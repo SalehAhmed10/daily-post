@@ -2,12 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  @variants responsive {
+    /* Hide scrollbar for Chrome, Safari, and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+
+    /* Hide scrollbar for IE, Edge, and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+  }
+}
+
+
+
 *{
   padding: 0%;
   margin: 0%;
   box-sizing: border-box;
+  scroll-behavior: smooth;
+  
 }
  
+
+
 .main-tag{
   /* force take full height of the page  */
   /* my header height is 70px and footer is 70px */
@@ -18,7 +40,7 @@
 
 /* BLUE THEME */
 
-@layer base {
+/* @layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -81,11 +103,11 @@
     --ring: 212.7 26.8% 83.9%;
   }
 }
- 
+  */
 
 
 
-/* @layer base {
+@layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
@@ -130,7 +152,7 @@
     --input: 240 3.7% 15.9%;
     --ring: 346.8 77.2% 49.8%;
   }
-} */
+}
 
 
 @layer base {

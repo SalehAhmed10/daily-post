@@ -1,6 +1,7 @@
 import { Product } from "@/types/types";
 import ProductCard from "./ui/ProductCard";
 import Container from "./ui/container";
+import CategoriesList from "./blocks/CategoriesList";
 
 interface ProductListProps {
   items: Product[];

@@ -45,6 +45,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  posts         Post[]
 }
 
 model VerificationToken {
@@ -54,4 +55,27 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Post {
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  content      String
+  imageUrl     String?
+  publicId     String?
+  categoryName String?
+  category     Category? @relation(fields: [categoryName], references: [categoryName])
+  isPublished  Boolean?  @default(false)
+  author       User      @relation(fields: [authorEmail], references: [email])
+  authorEmail  String
+  links        String[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model Category {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  categoryName String   @unique
+  posts        Post[]
+  postIDs      String[] @db.ObjectId
 }
