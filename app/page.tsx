@@ -28,8 +28,6 @@ export default async function Home() {
       <div className="flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8">
         {/* <ProductList items={products} /> */}
 
-        <CategoriesList />
-
         {posts?.length === 0 && (
           <div>
             <h1>There are no posts yet</h1>
