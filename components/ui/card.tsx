@@ -30,6 +30,7 @@ const CardImage = React.forwardRef<
     {...props}
   />
 ));
+CardImage.displayName = "CardImage";
 
 const CardHeader = React.forwardRef<
   HTMLDivElement,
