@@ -1,5 +1,6 @@
 import PostList from "@/components/PostList";
-import ProductList from "@/components/ProductList";
+import CategoriesList from "@/components/blocks/CategoriesList";
+
 import { TPost } from "@/types/types";
 
 const getPosts = async (): Promise<TPost[] | null> => {
@@ -11,13 +12,11 @@ const getPosts = async (): Promise<TPost[] | null> => {
       const posts = await res.json();
       console.log(posts);
       return posts;
-    } else {
-      throw new Error("Failed to fetch posts");
     }
   } catch (error) {
     console.log(error);
-    return null;
   }
+  return null;
 };
 
 export default async function Home() {
@@ -28,7 +27,15 @@ export default async function Home() {
     <div className="space-y-10 pb-10 ">
       <div className="flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8">
         {/* <ProductList items={products} /> */}
-        <PostList posts={posts} />
+
+        <CategoriesList />
+
+        {posts?.length === 0 && (
+          <div>
+            <h1>There are no posts yet</h1>
+          </div>
+        )}
+        {posts && <PostList posts={posts} />}
       </div>
     </div>
   );

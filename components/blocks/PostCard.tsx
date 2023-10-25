@@ -25,21 +25,22 @@ import { Button } from "../ui/button";
 
 //Promise<TPost[] | null>
 
-export const getSession = async () => {
-  try {
-    const session = await getServerSession(authOptions);
-    return session;
-  } catch (error) {
-    throw new Error("Failed to get session");
-  }
-};
+// export const getSession = async () => {
+//   try {
+//     const session = await getServerSession(authOptions);
+//     return session;
+//   } catch (error) {
+//     throw new Error("Failed to get session");
+//   }
+// };
 
 export default async function PostCard({ post }: { post: TPost }) {
   // const PostCard = async ({ post }: { post: TPost }) => {
-  const session = await getSession();
+
+  const session = await getServerSession(authOptions);
   console.log(session);
 
-  const isEditor = session && session.user?.email === post.author.email;
+  const isEditable = session && session?.user?.email === post.authorEmail;
 
   return (
     <Link
@@ -50,7 +51,7 @@ export default async function PostCard({ post }: { post: TPost }) {
         <CardImage className="max-h-60 overflow-hidden">
           <Image
             src={post.imageUrl ? post.imageUrl : NoThumbnail}
-            alt={post.title as string}
+            alt={post.title}
             className="aspect-video object-cover  transition-all duration-300 hover:scale-105"
             width={1000}
             height={1000}
@@ -65,6 +66,11 @@ export default async function PostCard({ post }: { post: TPost }) {
         <CardContent className="flex flex-col pb-2 min-h-[108px]">
           {post.content && (
             <p className="text-sm font-light ">{post.content.slice(0, 150)}</p>
+          )}
+          {isEditable && (
+            <div className="flex gap-3 font-bold py-2 px-4 rounded-md  w-fit">
+              <Link href={`/edit-post/${post.id}`}>Edit</Link>
+            </div>
           )}
         </CardContent>
         <CardFooter className="flex-col items-start pt-2">
