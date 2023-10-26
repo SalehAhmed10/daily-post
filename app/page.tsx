@@ -1,7 +1,16 @@
 import PostList from "@/components/PostList";
 import CategoriesList from "@/components/blocks/CategoriesList";
+import Container from "@/components/ui/container";
 
 import { TPost } from "@/types/types";
+
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Daily Post | Home",
+  description: "daily post project by @SalehAhmed10",
+  keywords: ["Daily Post", "All Posts", "Posts", "Blogs"],
+};
 
 const getPosts = async (): Promise<TPost[] | null> => {
   try {
@@ -24,16 +33,17 @@ export default async function Home() {
 
   return (
     // <main className="grid place-items-center h-screen">
-    <div className="space-y-10 pb-10 ">
-      <div className="flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8">
+    <div className="pb-10 ">
+      <div className="flex flex-col  px-4 sm:px-6 lg:px-8">
         {/* <ProductList items={products} /> */}
 
-        {posts?.length === 0 && (
-          <div>
-            <h1>There are no posts yet</h1>
-          </div>
-        )}
         {posts && <PostList posts={posts} />}
+
+        {posts?.length === 0 && (
+          <Container>
+            <h1>There are no posts yet.</h1>
+          </Container>
+        )}
       </div>
     </div>
   );

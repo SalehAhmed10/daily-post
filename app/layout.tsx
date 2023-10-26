@@ -24,18 +24,18 @@ export default function RootLayout({
       <body
         className={`${inter.className} min-h-screen flex flex-col transition-colors ${switchThemeDuration}`}
       >
-        <NextAuthProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem={true}
-          >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem={true}
+        >
+          <NextAuthProvider>
             <Header />
             <main className="flex-1 ">{children}</main>
 
             <Footer />
-          </ThemeProvider>
-        </NextAuthProvider>
+          </NextAuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

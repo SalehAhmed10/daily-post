@@ -3,6 +3,7 @@ import React from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { TCategory } from "@/types/types";
+import Container from "../ui/container";
 
 const getCategories = async (): Promise<TCategory[] | null> => {
   try {
@@ -22,21 +23,23 @@ export default async function CategoriesList() {
   console.log(categories);
 
   return (
-    <div className="flex flex-row gap-3 md:flex-wrap my-5">
-      {categories &&
-        categories.map((category) => (
-          <Button
-            size={"default"}
-            variant={"secondary"}
-            asChild
-            key={category.id}
-            className="min-w-fit"
-          >
-            <Link href={`/categories/${category.categoryName}`}>
-              {category.categoryName}
-            </Link>
-          </Button>
-        ))}
-    </div>
+    <Container>
+      <div className="flex flex-row gap-3 md:flex-wrap my-5">
+        {categories &&
+          categories.map((category) => (
+            <Button
+              size={"default"}
+              variant={"secondary"}
+              asChild
+              key={category.id}
+              className="min-w-fit"
+            >
+              <Link href={`/categories/${category.categoryName}`}>
+                {category.categoryName}
+              </Link>
+            </Button>
+          ))}
+      </div>
+    </Container>
   );
 }

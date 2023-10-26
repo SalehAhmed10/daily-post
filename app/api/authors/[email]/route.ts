@@ -12,7 +12,13 @@ export async function GET(request: Request, {params} : {params: {email: string}}
             include: {
                 posts: {orderBy: {
                     createdAt: 'desc'
-                }}
+                },
+                include: {
+                    author: true,
+                }
+            
+            }
+                
             }
         })
 
