@@ -1,14 +1,4 @@
 import React from "react";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardImage,
-  CardTitle,
-} from "../ui/card";
-import { MdEditNote } from "react-icons/md";
-import { Button } from "../ui/button";
 
 export default function CardPageLoading() {
   const length = 6;
@@ -16,8 +6,12 @@ export default function CardPageLoading() {
   return (
     <div className="py-10">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-x-5 gap-y-16 md:gap-y-10 ">
-        {[...Array(length)].map((_, i) => (
-          <div className=" shadow rounded-md p-4 max-w-sm w-full mx-auto ">
+        {/* array map lenth times with index as a key */}
+        {Array.from(Array(length).keys()).map((_, index) => (
+          <div
+            className=" shadow rounded-md p-4 max-w-sm w-full mx-auto "
+            key={index}
+          >
             <div className="animate-pulse flex flex-col space-x-4">
               {/*card image pulse */}
               <div className="rounded-md bg-foreground/60 h-48 w-full"></div>
