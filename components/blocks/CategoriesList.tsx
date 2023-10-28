@@ -22,23 +22,35 @@ export default async function CategoriesList() {
   const categories = await getCategories();
   console.log(categories);
 
+  // const sortedCategories = categories?.sort((a, b) => {
+  //   return b.posts.length - a.posts.length;
+  // });
+
   return (
     <Container>
       <div className="flex flex-row gap-3 md:flex-wrap my-5">
-        {categories &&
-          categories.map((category) => (
-            <Button
-              size={"default"}
-              variant={"secondary"}
-              asChild
-              key={category.id}
-              className="min-w-fit"
+        {categories?.map((category) => (
+          <Button
+            size={"default"}
+            variant={"secondary"}
+            asChild
+            key={category.id}
+            className="min-w-fit group"
+          >
+            <Link
+              href={`/categories/${category.categoryName}`}
+              className="flex gap-2 items-center"
             >
-              <Link href={`/categories/${category.categoryName}`}>
-                {category.categoryName}
-              </Link>
-            </Button>
-          ))}
+              <span
+                // number of posts in each category badge tailwindcss
+                className="flex justify-center items-center bg-gray-200 text-gray-800 text-xs font-bold h-[20px] w-[20px] rounded-full "
+              >
+                {category.posts.length}
+              </span>{" "}
+              {category.categoryName}
+            </Link>
+          </Button>
+        ))}
       </div>
     </Container>
   );

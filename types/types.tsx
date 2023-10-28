@@ -20,6 +20,7 @@ export interface PostData {
 export type TCategory = {
   id: string;
   categoryName: string;
+  posts: TPost[];
 };
 
 export type TPost = {

@@ -7,7 +7,9 @@ import PostList from "@/components/PostList";
 
 const getPosts = async (email: string) => {
   try {
-    const res = await fetch(`${process.env.NEXTAPP_URL}/api/authors/${email}`);
+    const res = await fetch(`${process.env.NEXTAPP_URL}/api/authors/${email}`, {
+      cache: "no-store",
+    });
     const { posts } = await res.json();
     return posts;
   } catch (err) {

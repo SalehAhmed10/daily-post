@@ -31,7 +31,11 @@ export default function RootLayout({
         >
           <NextAuthProvider>
             <Header />
-            <main className="flex-1 ">{children}</main>
+            <main className="flex-1 relative">
+              <div className="absolute inset-0 -z-10 h-full w-full bg-background bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#27272A_1px,transparent_1px)] [background-size:24px_24px]"></div>
+              {/* <div className="absolute inset-0 -z-10 h-full w-full bg-[size:6rem_4rem] bg-background bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] dark:bg-background dark:bg-[linear-gradient(to_right,#27272A_1px,transparent_1px),linear-gradient(to_bottom,#27272A_1px,transparent_1px)]"></div> */}
+              {children}
+            </main>
 
             <Footer />
           </NextAuthProvider>
