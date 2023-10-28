@@ -28,7 +28,7 @@ export default async function CategoriesList() {
 
   return (
     <Container>
-      <div className="flex flex-row gap-3 md:flex-wrap my-5">
+      <div className="flex flex-row gap-3 md:flex-wrap my-5 px-2 md:px-0">
         {categories?.map((category) => (
           <Button
             size={"default"}
@@ -43,9 +43,9 @@ export default async function CategoriesList() {
             >
               <span
                 // number of posts in each category badge tailwindcss
-                className="flex justify-center items-center bg-gray-200 text-gray-800 text-xs font-bold h-[20px] w-[20px] rounded-full "
+                className="flex justify-center items-center bg-accent-foreground text-background text-xs font-bold h-[20px] w-[20px] rounded-full "
               >
-                {category.posts.length}
+                {category?.posts?.length}
               </span>{" "}
               {category.categoryName}
             </Link>
