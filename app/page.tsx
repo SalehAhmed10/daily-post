@@ -34,7 +34,7 @@ export default async function Home() {
   return (
     // <main className="grid place-items-center h-screen">
     <div className="pb-10 relative h-full">
-      <div className="flex flex-col  px-4 sm:px-6 lg:px-8">
+      <div className="flex flex-col  ">
         {/* <ProductList items={products} /> */}
 
         {posts && <PostList posts={posts} />}

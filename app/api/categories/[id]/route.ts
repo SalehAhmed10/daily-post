@@ -3,22 +3,24 @@ import { NextResponse } from "next/server"
 
 export async function GET(request : Request , {params}: {params: {id: string}}){
 
-    const categoryName = params.id 
+    const categorySlug = params.id 
 
     try{
         const posts = await prisma.category.findUnique({
             where: {
-                categoryName: categoryName ,
+                categorySlug: categorySlug
             },
             include : {
                 posts: {
                     include: {
-                        author: true 
+                        author: true, 
+                        category: true
                     },
                     orderBy: {
                         createdAt: 'desc'
                     }
-                }
+                },
+                
             }
         })
 

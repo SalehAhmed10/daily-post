@@ -8,7 +8,8 @@ export async function GET() {
             include: {
                 author: {
                     select: {email: true , name : true , image : true }
-                }
+                },
+                category: true
             },
             orderBy : {
                 createdAt : 'desc'

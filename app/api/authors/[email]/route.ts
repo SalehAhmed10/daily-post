@@ -15,6 +15,7 @@ export async function GET(request: Request, {params} : {params: {email: string}}
                 },
                 include: {
                     author: true,
+                    category: true,
                 }
             
             }

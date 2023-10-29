@@ -75,13 +75,14 @@ export default async function PostCard({ post }: { post: TPost }) {
             size={"sm"}
             variant={"outline"}
             className="border border-primary/30 group-focus:border-primary/80"
+            asChild
           >
             <Link href={`/posts/${post.id}`}> Read More</Link>
           </Button>
         )}
 
         <div className="flex justify-between items-end mt-auto pt-4  border-zinc-200 dark:border-zinc-700">
-          <Link href={`/categories/${post.categoryName}`}>
+          <Link href={`/categories/${post.category.categorySlug}`}>
             <span className="text-sm text-gray-500 dark:text-gray-400  group-hover:underline ">
               {post.categoryName}
             </span>

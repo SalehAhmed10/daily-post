@@ -17,6 +17,7 @@ const getPostsByCategory = async (
     if (res.ok) {
       const categories = await res.json();
       const posts = categories.posts;
+      console.log(posts);
       return posts;
     }
   } catch (error) {
@@ -39,7 +40,7 @@ export default async function CategoryPosts({
   //   getPostsByCategory(params.categoryName),
   // ]);
 
-  console.log(posts);
+  // console.log(posts);
   return (
     <Container>
       {posts && (

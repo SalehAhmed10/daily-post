@@ -8,9 +8,13 @@ export async function GET(request: Request , {params} : {params: {id: string}}) 
         const post = await prisma.post.findUnique({
             where: {
                 id: id
+            },
+            include: {
+                category: true
             }
         })
 
+        console.log(`BY ID : ${post}`)
         return NextResponse.json(post)
     }
     catch(error) {

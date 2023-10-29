@@ -76,6 +76,7 @@ model Post {
 model Category {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
   categoryName String   @unique
+  categorySlug String   @unique
   posts        Post[]
   postIDs      String[] @db.ObjectId
 }

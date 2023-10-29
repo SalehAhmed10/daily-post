@@ -1,9 +1,9 @@
 import React from "react";
 
-import { Button } from "../ui/button";
-import Link from "next/link";
 import { TCategory } from "@/types/types";
 import Container from "../ui/container";
+
+import CategoriesBtn from "./CategoriesBtn";
 
 const getCategories = async (): Promise<TCategory[] | null> => {
   try {
@@ -20,7 +20,7 @@ const getCategories = async (): Promise<TCategory[] | null> => {
 
 export default async function CategoriesList() {
   const categories = await getCategories();
-  console.log(categories);
+  // console.log(categories);
 
   // const sortedCategories = categories?.sort((a, b) => {
   //   return b.posts.length - a.posts.length;
@@ -28,9 +28,12 @@ export default async function CategoriesList() {
 
   return (
     <Container>
-      <div className="flex flex-row gap-3 md:flex-wrap my-5 px-2 md:px-0">
-        {categories?.map((category) => (
-          <Button
+      <div className="flex flex-row gap-3 md:flex-wrap my-5 px-5 ">
+        {categories?.map((category) => {
+          return <CategoriesBtn key={category.id} category={category} />;
+        })}
+        {/* 
+           <Button
             size={"default"}
             variant={"secondary"}
             asChild
@@ -39,7 +42,10 @@ export default async function CategoriesList() {
           >
             <Link
               href={`/categories/${category.categoryName}`}
-              className="flex gap-2 items-center"
+              className={cn(
+                "flex gap-2 items-center"
+                // check what getegory is active
+              )}
             >
               <span
                 // number of posts in each category badge tailwindcss
@@ -49,8 +55,7 @@ export default async function CategoriesList() {
               </span>{" "}
               {category.categoryName}
             </Link>
-          </Button>
-        ))}
+          </Button> */}
       </div>
     </Container>
   );

@@ -11,11 +11,12 @@ const getPosts = async (email: string) => {
       cache: "no-store",
     });
     const { posts } = await res.json();
+    console.log(posts);
     return posts;
   } catch (err) {
     console.log(err);
-    return null;
   }
+  return null;
 };
 
 export default async function page() {
@@ -33,9 +34,8 @@ export default async function page() {
 
   return (
     <div className="pb-10 ">
+      {/* <ProductList items={products} /> */}
       <div className="flex flex-col  px-4 sm:px-6 lg:px-8">
-        {/* <ProductList items={products} /> */}
-
         {posts && <PostList posts={posts} />}
 
         {posts?.length === 0 && (
