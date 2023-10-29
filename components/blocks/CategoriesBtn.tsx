@@ -4,14 +4,10 @@ import { TCategory } from "@/types/types";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 // export default async function CategoriesBtn({
-export default async function CategoriesList({
-  category,
-}: {
-  category: TCategory;
-}) {
+export default function CategoriesList({ category }: { category: TCategory }) {
   // console.log(category);
 
   const router = usePathname();
