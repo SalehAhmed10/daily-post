@@ -17,15 +17,19 @@ const getPosts = async (): Promise<TPost[] | null> => {
     const res = await fetch(`${process.env.NEXTAPP_URL}/api/posts`, {
       cache: "no-store",
     });
-    if (res.ok) {
-      const posts = await res.json();
-      console.log(posts);
-      return posts;
+
+    if (res.status !== 200) {
+      throw new Error("Failed to fetch posts");
     }
+
+    const posts: TPost[] = await res.json();
+    // console.log(posts);
+
+    return posts;
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    return null;
   }
-  return null;
 };
 
 export default async function Home() {
