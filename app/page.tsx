@@ -7,7 +7,7 @@ import { TPost } from "@/types/types";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Daily Post | Home",
+  title: "Home | Daily Post",
   description: "daily post project by @SalehAhmed10",
   keywords: ["Daily Post", "All Posts", "Posts", "Blogs"],
 };

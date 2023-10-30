@@ -10,7 +10,8 @@ export async function GET(request: Request , {params} : {params: {id: string}}) 
                 id: id
             },
             include: {
-                category: true
+                category: true,
+                author : true
             }
         })
 

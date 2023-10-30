@@ -10,7 +10,10 @@ import { NextAuthProvider } from "../components/Providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Daily Post",
+  title: {
+    default: `Daily Post`,
+    template: `%s | Daily Post`,
+  },
   description: "daily post project by @SalehAhmed10",
 };
 

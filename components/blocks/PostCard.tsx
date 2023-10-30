@@ -77,7 +77,7 @@ export default async function PostCard({ post }: { post: TPost }) {
             className="border border-primary/30 group-focus:border-primary/80"
             asChild
           >
-            <Link href={`/posts/${post.id}`}> Read More</Link>
+            <Link href={`/posts/${post.id}`}> Read Post Here</Link>
           </Button>
         )}
 

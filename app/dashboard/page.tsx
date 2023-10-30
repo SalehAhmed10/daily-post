@@ -4,6 +4,13 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import Container from "@/components/ui/container";
 import PostList from "@/components/PostList";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dashboard",
+  description: "manage your posts here",
+  keywords: ["edit", "delete", "posts"],
+};
 
 const getPosts = async (email: string) => {
   try {
