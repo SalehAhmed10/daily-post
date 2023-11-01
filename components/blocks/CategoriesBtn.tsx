@@ -5,6 +5,8 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import { useToast } from "../ui/use-toast";
+import { ToastAction } from "../ui/toast";
 
 // export default async function CategoriesBtn({
 export default function CategoriesList({ category }: { category: TCategory }) {
@@ -15,6 +17,8 @@ export default function CategoriesList({ category }: { category: TCategory }) {
 
   const currentCategory = decodeURI(router?.split("/")[2]);
   // console.log(currentCategory);
+
+  const { toast } = useToast();
 
   const checkActive = (category: TCategory) => {
     if (category.categorySlug === currentCategory) {
@@ -36,6 +40,13 @@ export default function CategoriesList({ category }: { category: TCategory }) {
         hover:bg-primary/70 hover:text-background hover:shadow-md
         `
       )}
+      onClick={() => {
+        toast({
+          title: `Category: ${category?.categoryName} `,
+          description: `Number of posts: ${category?.posts?.length}`,
+          className: "bg-blue-500 text-white",
+        });
+      }}
     >
       <Link
         href={`/categories/${category.categorySlug}`}
