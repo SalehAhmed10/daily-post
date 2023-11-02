@@ -28,7 +28,7 @@ export default async function CategoriesList() {
 
   return (
     <Container>
-      <div className="flex flex-row gap-3 md:flex-wrap my-5 px-5 ">
+      <div className="flex flex-row gap-3 md:flex-wrap my-5 px-5 md:px-0 ">
         {categories?.map((category) => {
           return <CategoriesBtn key={category.id} category={category} />;
         })}

@@ -45,7 +45,8 @@ export default async function PostCard({ post }: { post: TPost }) {
   const isEditable = session && session?.user?.email === post.authorEmail;
 
   return (
-    <div className="flex flex-col relative group overflow-hidden bg-[#F5F5F5] shadow-sm rounded-md dark:bg-zinc-800 h-full ">
+    // <div className="flex flex-col relative group overflow-hidden bg-[#F5F5F5] shadow-sm rounded-md dark:bg-zinc-800 h-full ">
+    <div className="flex flex-col relative group overflow-hidden bg-card shadow-sm rounded-md dark:bg-card h-full ">
       <Image
         alt="Blog image"
         src={post.imageUrl ? post.imageUrl : NoThumbnail}
@@ -65,7 +66,8 @@ export default async function PostCard({ post }: { post: TPost }) {
         )}
 
         {post.content && (
-          <p className="flex-grow line-clamp-3 mb-4 text-gray-500 dark:text-gray-400">
+          // <p className="flex-grow line-clamp-3 mb-4 text-gray-500 dark:text-gray-400">
+          <p className="flex-grow line-clamp-3 mb-4 dark:text-text-light ">
             {post.content}
           </p>
         )}

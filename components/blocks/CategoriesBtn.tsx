@@ -36,8 +36,9 @@ export default function CategoriesList({ category }: { category: TCategory }) {
       key={category.id}
       //   className={cn(`min-w-fit group` && checkActive(category) && "bg-red-500")}
       className={cn(
-        `min-w-fit group ${checkActive(category) ? "bg-primary/80" : ""}
-        hover:bg-primary/70 hover:text-background hover:shadow-md
+        `min-w-fit group shadow-sm hover:shadow-lg hover:bg-secondary
+        ${checkActive(category) ? "bg-secondary" : ""}
+        
         `
       )}
       onClick={() => {

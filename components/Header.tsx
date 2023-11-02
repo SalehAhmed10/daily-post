@@ -10,6 +10,7 @@ import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { cn } from "@/lib/utils";
 
 const routes = [
   {
@@ -33,6 +34,19 @@ const routes = [
 export default function Header() {
   const pathname = usePathname();
   const { data: session, status } = useSession();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // wait for theme to be loaded before rendering the header to avoid flash of light theme on dark theme
   // const [mounted, setMounted] = useState(false);
@@ -41,7 +55,24 @@ export default function Header() {
   // if (!mounted) return null;
 
   return (
-    <header className="sm:flex sm:justify-between py-3  border-b h-[90px]  flex items-center">
+    //     `sm:flex sm:justify-between py-3   h-[90px]  flex items-center sticky top-0 z-50 backdrop-filter backdrop-blur-lg bg-opacity-60 dark:bg-opacity-60 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100
+    //     transition-all duration-300 ease-in-out ${
+    //       isScrolled
+    //         ? "bg-background/50 dark:bg-background-dark/50 shadow-md"
+    //         : "bg-transparent dark:bg-transparent"
+    //     }
+    // `
+    <header
+      className={cn(
+        `
+       sm:flex sm:justify-between py-3   h-[90px]  flex items-center sticky top-0 z-50 backdrop-filter backdrop-blur-lg  
+        ${
+          isScrolled
+            ? "bg-background/50 dark:bg-background-dark/50 shadow-md"
+            : "bg-transparent dark:bg-transparent"
+        }`
+      )}
+    >
       <Container>
         <div className="relative px-4   flex  items-center justify-between w-full">
           <div className="flex items-center">
