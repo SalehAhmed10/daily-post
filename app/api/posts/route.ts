@@ -26,7 +26,7 @@ export async function GET() {
 
 export async function POST(request: Request){
     const {title , content , links , selectedCategory , imageUrl , publicId} = await request.json() 
-    const authorEmail = 'dev.salehahmed@gmail.com'
+    const authorEmail = 'lm.ahmed1010@gmail.com'
 
     if(!title || !content ) {
         return NextResponse.json({message : "Title and Content are required"} , {status : 500})
