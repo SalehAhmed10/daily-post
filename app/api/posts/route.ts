@@ -1,5 +1,6 @@
 import prisma from "@/lib/prismadb";
 import {  NextResponse } from "next/server";
+import { getAuthSession } from "../auth/[...nextauth]/route";
 
 export async function GET() {
 
@@ -25,31 +26,40 @@ export async function GET() {
 }
 
 export async function POST(request: Request){
-    const {title , content , links , selectedCategory , imageUrl , publicId} = await request.json() 
-    const authorEmail = 'lm.ahmed1010@gmail.com'
+    const session = await getAuthSession()
 
-    if(!title || !content ) {
-        return NextResponse.json({message : "Title and Content are required"} , {status : 500})
-    }
-
-    try{
+    if (!session) {
+        return NextResponse.json({ error: "Not authenticated signin to create a post" }, { status: 401 });
+      }
+    
+      const { title, content, links, selectedCategory, imageUrl, publicId } =
+        await request.json();
+    
+      const authorEmail = session?.user?.email as string;
+    
+      if (!title || !content) {
+        return NextResponse.json(
+          { error: "Title and content are required." },
+          { status: 500 }
+        );
+      }
+    
+      try {
         const newPost = await prisma.post.create({
-            data: {
-                title,
-                content,
-                links,
-                imageUrl,
-                publicId,
-                categoryName :selectedCategory ,
-                authorEmail: authorEmail
-            }
-        })
-
-        console.log("Post created successfully")
-        return NextResponse.json(newPost)
+          data: {
+            title,
+            content,
+            links,
+            imageUrl,
+            publicId,
+            categoryName: selectedCategory,
+            authorEmail,
+          },
+        });
+    
+        console.log("Post created successfully");
+        return NextResponse.json(newPost);
+      } catch (error) {
+        return NextResponse.json({message : "Error: an error occured while creating the post"});
+      }
     }
-    catch(error) {
-        console.log(error)
-        NextResponse.json({message : "Error: an error occured while creating the post"} , {status : 500})
-    }
-}

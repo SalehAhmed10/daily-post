@@ -16,6 +16,7 @@ import { Button } from "../ui/button";
 import { MdEditNote } from "react-icons/md";
 import NoThumbnail from "@/public/no-thumbnail.webp";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface PostDetailProps {
   post: TPost;
@@ -39,11 +40,11 @@ export const PostDetail = ({ post }: PostDetailProps) => {
   return (
     <>
       <div className="p-4 flex-1 flex flex-col py-5 ">
-        <div className="post-hero overflow-hidden">
+        <div className="post-hero overflow-hidden rounded-lg">
           <Image
             src={imageUrl ? imageUrl : NoThumbnail}
             alt="Blog image"
-            className="w-full h-96 object-cover rounded-md hover:scale-105 transition duration-500 ease-in-out transform hover:shadow-2xl"
+            className="w-full h-[50vh] object-cover rounded-lg hover:scale-105 transition duration-500 ease-in-out transform hover:shadow-2xl"
             height={1000}
             style={{
               aspectRatio: "500/300",
@@ -91,6 +92,33 @@ export const PostDetail = ({ post }: PostDetailProps) => {
         <div className="flex-1 my-5">
           <p className="text-gray-600 dark:text-gray-400">{content}</p>
         </div>
+
+        {/* links exists or null */}
+        {links && links.length > 0 ? (
+          <div className="flex flex-col gap-2">
+            <h3 className="text-xl font-semibold">Links</h3>
+            <ul className="flex flex-col gap-2">
+              {links.map((link, index) => (
+                <li key={index}>
+                  <Link
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 hover:underline"
+                  >
+                    {link}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <p>
+            <span className="text-gray-600 dark:text-gray-400">
+              No links added
+            </span>
+          </p>
+        )}
       </div>
     </>
   );

@@ -3,6 +3,7 @@ import React from "react";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
+import CreatePostForm from "@/components/blocks/CreatePostForm";
 
 export default async function page() {
   const session = await getServerSession(authOptions);
@@ -14,7 +15,7 @@ export default async function page() {
   }
   return (
     <Container>
-      <h1>create post</h1>
+      <CreatePostForm />
     </Container>
   );
 }
