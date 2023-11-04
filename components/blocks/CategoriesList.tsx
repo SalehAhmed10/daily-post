@@ -7,7 +7,9 @@ import CategoriesBtn from "./CategoriesBtn";
 
 const getCategories = async (): Promise<TCategory[] | null> => {
   try {
-    const res = await fetch(`${process.env.NEXTAPP_URL}/api/categories`);
+    const res = await fetch(`${process.env.NEXTAPP_URL}/api/categories`, {
+      cache: "no-store",
+    });
     if (res.ok) {
       const categories = await res.json();
       return categories;
