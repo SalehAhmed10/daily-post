@@ -4,24 +4,25 @@ import { TCategory } from "@/types/types";
 import Container from "../ui/container";
 
 import CategoriesBtn from "./CategoriesBtn";
+import { getAllCategories } from "@/server/action";
 
-const getCategories = async (): Promise<TCategory[] | null> => {
-  try {
-    const res = await fetch(`${process.env.NEXTAPP_URL}/api/categories`, {
-      cache: "no-store",
-    });
-    if (res.ok) {
-      const categories = await res.json();
-      return categories;
-    }
-  } catch (error) {
-    console.log(error);
-  }
-  return null;
-};
+// const getCategories = async (): Promise<TCategory[] | null> => {
+//   try {
+//     const res = await fetch(`${process.env.NEXTAPP_URL}/api/categories`, {
+//       cache: "no-store",
+//     });
+//     if (res.ok) {
+//       const categories = await res.json();
+//       return categories;
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+//   return null;
+// };
 
 export default async function CategoriesList() {
-  const categories = await getCategories();
+  const categories = (await getAllCategories()) as TCategory[];
   // console.log(categories);
 
   // const sortedCategories = categories?.sort((a, b) => {

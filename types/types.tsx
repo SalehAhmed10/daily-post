@@ -22,6 +22,9 @@ export type TCategory = {
   categoryName: string;
   categorySlug: string;
   posts: TPost[];
+  _count: {
+    posts: number;
+  };
 };
 
 export type TPost = {

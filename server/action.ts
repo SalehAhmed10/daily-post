@@ -26,6 +26,11 @@ export async function getAllCategories () {
                 _count: {
                     select: { posts: true }
                 }
+            },
+            orderBy: {
+                posts:{
+                    _count: 'desc'
+                }
             }
         })
 
