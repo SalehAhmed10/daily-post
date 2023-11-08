@@ -8,9 +8,16 @@ import { usePathname } from "next/navigation";
 import { useToast } from "../ui/use-toast";
 import { ToastAction } from "../ui/toast";
 
+import { useEffect, useState } from "react";
+
 // export default async function CategoriesBtn({
 export default function CategoriesList({ category }: { category: TCategory }) {
-  // console.log(category);
+  // keep track of categories post length and update ui when new post is added to a category
+  const [postsLength, setPostsLength] = useState(category.posts.length);
+
+  useEffect(() => {
+    setPostsLength(category.posts.length);
+  }, [category.posts.length]);
 
   const router = usePathname();
   // console.log(router);
