@@ -58,7 +58,7 @@ export default function CategoriesBtn({ category }: { category: TCategory }) {
       onClick={() => {
         toast({
           title: `Category: ${category?.categoryName} `,
-          description: `Number of posts: ${category?.posts?.length}`,
+          description: `Number of posts: ${categoryCount}`,
           className: "bg-blue-500 text-white",
         });
       }}
