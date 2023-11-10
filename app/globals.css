@@ -27,7 +27,16 @@
   scroll-behavior: smooth;
   
 }
+
+.success-toast{
+  background-color: #4caf50;
+  color: white;
+}
  
+.error-toast{
+  background-color: #f44336;
+  color: white;
+}
 
 
 .main-tag{

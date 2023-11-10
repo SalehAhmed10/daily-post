@@ -99,11 +99,11 @@ export default function CreatePostForm() {
     e.preventDefault();
 
     if (!title || !content || !selectedCategory) {
-      const errorMessage = "Title and content and category are required";
+      const errorMessage = "Title, Content and Category are required";
       toast({
-        title: errorMessage,
-        description: "Please fill in all the required fields",
-        className: "bg-red-500 text-white",
+        title: "Error 😢",
+        description: errorMessage,
+        className: "error-toast",
       });
       return;
     }
@@ -126,17 +126,17 @@ export default function CreatePostForm() {
 
       if (res.ok) {
         toast({
-          title: "Post created successfully",
+          title: "Success 🎉",
           description: "Your post has been created successfully",
-          className: "bg-green-500 text-white",
+          className: "success-toast",
         });
         router.push("/dashboard");
         router.refresh();
       } else {
         toast({
-          title: "Something went wrong",
-          description: "Please try again",
-          className: "bg-red-500 text-white",
+          title: "Error 😢",
+          description: "Something went wrong. Please try again",
+          className: "error-toast",
         });
       }
     } catch (error) {
@@ -195,7 +195,7 @@ export default function CreatePostForm() {
 
           <CldUploadButton
             uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
-            className={`h-48 border-2 mt-4 border-dotted grid place-items-center rounded-md relative ${
+            className={`h-60 border-2 mt-4 border-dotted grid place-items-center rounded-md relative ${
               imageUrl && "pointer-events-none"
             }`}
             onUpload={handleImageUpload}

@@ -24,6 +24,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { Button } from "../ui/button";
 // import { cx } from "@/utils/all";
 import { cn } from "@/lib/utils";
+import DeleteButton from "./DeleteButton";
 
 //Promise<TPost[] | null>
 
@@ -117,14 +118,19 @@ export default async function PostCard({ post }: { post: TPost }) {
         </div>
       </div>
       {isEditable && (
-        <div className="absolute top-0 right-0 p-2 transition-transform transform group-hover:translate-x-0 translate-x-full">
-          <Button size="icon" variant="default" className="text-3xl" asChild>
-            <Link href={`/edit-post/${post.id}`} tabIndex={-1}>
-              <MdEditNote />
-              <span className="sr-only">Edit Post</span>
-            </Link>
-          </Button>
-        </div>
+        <>
+          <div className="absolute top-0 right-0 p-2 transition-transform transform group-hover:translate-x-0 translate-x-full">
+            <Button size="icon" variant="default" className="text-3xl" asChild>
+              <Link href={`/edit-post/${post.id}`} tabIndex={-1}>
+                <MdEditNote />
+                <span className="sr-only">Edit Post</span>
+              </Link>
+            </Button>
+          </div>
+          <div className="absolute top-10 right-0 p-2 transition-transform transform group-hover:translate-x-0 translate-x-full">
+            <DeleteButton id={post.id} />
+          </div>
+        </>
       )}
     </div>
     // <Card
