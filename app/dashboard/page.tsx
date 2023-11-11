@@ -5,6 +5,8 @@ import { redirect } from "next/navigation";
 import Container from "@/components/ui/container";
 import PostList from "@/components/PostList";
 import { Metadata } from "next";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -47,7 +49,10 @@ export default async function page() {
 
         {posts?.length === 0 && (
           <Container>
-            <h1>There are no posts yet.</h1>
+            <h1>There are no posts yet.</h1>{" "}
+            <Button variant="default" className="mt-4" asChild>
+              <Link href="/create-post">Create one</Link>
+            </Button>
           </Container>
         )}
       </div>

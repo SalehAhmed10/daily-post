@@ -2,6 +2,8 @@ import React from "react";
 import { TPost } from "@/types/types";
 import Container from "@/components/ui/container";
 import PostList from "@/components/PostList";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const getPostsByCategory = async (
   categoryName: string
@@ -43,19 +45,18 @@ export default async function CategoryPosts({
   // console.log(posts);
   return (
     <Container>
-      {posts && (
-        <div className="pb-10 ">
-          {/* <section className="flex flex-col  px-4 sm:px-6 lg:px-8 py-10">
-            <h1>All the posts in {decodeURIComponent(category)}</h1>
-          </section> */}
-          {posts && <PostList posts={posts} />}
-        </div>
-      )}
-      {posts?.length === 0 && (
-        <Container>
-          <h1>There are no posts yet.</h1>
-        </Container>
-      )}
+      <div className="flex flex-col  px-4 sm:px-6 lg:px-8">
+        {posts && <PostList posts={posts} />}
+
+        {posts?.length === 0 && (
+          <Container>
+            <h1>There are no posts yet.</h1>{" "}
+            <Button variant="default" className="mt-4" asChild>
+              <Link href="/create-post">Create one</Link>
+            </Button>
+          </Container>
+        )}
+      </div>
     </Container>
   );
 }

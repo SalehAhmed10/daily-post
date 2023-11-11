@@ -1,6 +1,8 @@
 import { PostDetail } from "@/components/blocks/PostDetail";
+import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
 import { TPost } from "@/types/types";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
 
@@ -57,7 +59,10 @@ export default async function page({ params }: { params: { id: string } }) {
       )}
       {!post && (
         <Container>
-          <h1>There are no posts yet.</h1>
+          <h1>There are no posts yet.</h1>{" "}
+          <Button variant="default" className="mt-4" asChild>
+            <Link href="/create-post">Create one</Link>
+          </Button>
         </Container>
       )}
     </Container>

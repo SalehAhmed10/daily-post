@@ -1,10 +1,12 @@
 import PostList from "@/components/PostList";
 import CategoriesList from "@/components/blocks/CategoriesList";
+import { Button } from "@/components/ui/button";
 import Container from "@/components/ui/container";
 
 import { TPost } from "@/types/types";
 
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Home | Daily Post",
@@ -45,7 +47,10 @@ export default async function Home() {
 
         {posts?.length === 0 && (
           <Container>
-            <h1>There are no posts yet.</h1>
+            <h1>There are no posts yet.</h1>{" "}
+            <Button variant="default" className="mt-4" asChild>
+              <Link href="/create-post">Create one</Link>
+            </Button>
           </Container>
         )}
       </div>
