@@ -50,7 +50,13 @@ export default async function CategoryPosts({
 
         {posts?.length === 0 && (
           <Container>
-            <h1>There are no posts yet.</h1>{" "}
+            <h1>
+              There are no posts in{" "}
+              <span className="font-bold">
+                {decodeURIComponent(category).toUpperCase()}{" "}
+              </span>
+              yet.
+            </h1>{" "}
             <Button variant="default" className="mt-4" asChild>
               <Link href="/create-post">Create one</Link>
             </Button>

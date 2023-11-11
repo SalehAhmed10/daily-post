@@ -7,6 +7,7 @@ import { switchThemeDuration } from "@/constants/page";
 import Footer from "@/components/Footer";
 import { NextAuthProvider } from "../components/Providers";
 import { Toaster } from "@/components/ui/toaster";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -47,6 +48,7 @@ export default function RootLayout({
             <Footer />
           </NextAuthProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
