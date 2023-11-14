@@ -100,6 +100,7 @@ export default async function PostCard({ post }: { post: TPost }) {
               className="rounded-full object-cover transition-all duration-300 group-hover:scale-110"
               width={20}
               height={20}
+              priority={true}
             />
             {/* keep author name maximum 12 letter length show rest as ... and add tooltip */}
             <TooltipProvider>
