@@ -101,6 +101,7 @@ export default async function PostCard({ post }: { post: TPost }) {
               width={20}
               height={20}
               priority={true}
+              loading="eager"
             />
             {/* keep author name maximum 12 letter length show rest as ... and add tooltip */}
             <TooltipProvider>
