@@ -58,6 +58,9 @@ export default async function PostCard({ post }: { post: TPost }) {
           objectFit: "cover",
         }}
         width={500}
+        // no lazy load for now
+        loading="eager"
+        priority={true}
       />
       <div className="p-4 flex-1 flex flex-col">
         {post.title && (
@@ -100,8 +103,6 @@ export default async function PostCard({ post }: { post: TPost }) {
               className="rounded-full object-cover transition-all duration-300 group-hover:scale-110"
               width={20}
               height={20}
-              priority={true}
-              loading="eager"
             />
             {/* keep author name maximum 12 letter length show rest as ... and add tooltip */}
             <TooltipProvider>
