@@ -9,18 +9,18 @@ export async function GET(request: Request, {params} : {params: {email: string}}
             where: {
                 email: email
             },
+            
             include: {
                 posts: {orderBy: {
-                    createdAt: 'desc'
+                    updatedAt: 'desc'
                 },
                 include: {
                     author: true,
                     category: true,
                 }
+            } 
+            }
             
-            }
-                
-            }
         })
 
         if(!posts){

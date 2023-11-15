@@ -1,41 +1,33 @@
 "use client";
 
-import { TCategory } from "@/types/types";
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import { TCategory, TPost } from "@/types/types";
 import { useRouter } from "next/navigation";
-import { CldUploadButton, CldUploadWidgetResults } from "next-cloudinary";
-import Image from "next/image";
+import React, { useEffect, useState } from "react";
 import { useToast } from "../ui/use-toast";
-
-import { Input } from "@/components/ui/input";
-// import { Textarea } from "@/components/ui/textarea";
+import { CldUploadButton, CldUploadWidgetResults } from "next-cloudinary";
+import { Textarea } from "../ui/textarea";
 import {
   AiOutlineCloudUpload,
   AiOutlineLink,
   AiOutlinePlus,
 } from "react-icons/ai";
+import Link from "next/link";
 import { GoTrash } from "react-icons/go";
+import { Input } from "../ui/input";
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
 import { Button } from "../ui/button";
-
-import "@uiw/react-md-editor/markdown-editor.css";
-import "@uiw/react-markdown-preview/markdown.css";
+import Image from "next/image";
 import MDEditor from "@uiw/react-md-editor";
 import { useTheme } from "next-themes";
 
-// import "@uiw/react-markdown-editor/markdown-editor.css";
-import "@uiw/react-markdown-preview/markdown.css";
-
-export default function CreatePostForm() {
+export default function EditPostForm({ post }: { post: TPost }) {
   const [links, setLinks] = useState<string[]>([]);
   const [linkInput, setLinkInput] = useState("");
   const [title, setTitle] = useState("");
@@ -44,11 +36,44 @@ export default function CreatePostForm() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [publicId, setPublicId] = useState("");
-
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const router = useRouter();
   const { toast } = useToast();
+
+  useEffect(() => {
+    const fetchAllCategories = async () => {
+      try {
+        const res = await fetch("/api/categories");
+        const catNames = await res.json();
+        setCategories(catNames);
+        console.log(catNames);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchAllCategories();
+
+    const initValue = () => {
+      setTitle(post.title);
+      setContent(post.content);
+      setLinks(post.links || []);
+      setSelectedCategory(post.categoryName || "");
+      setImageUrl(post.imageUrl || "");
+      setPublicId(post.publicId || "");
+    };
+
+    initValue();
+  }, [
+    post.title,
+    post.content,
+    post.links,
+    post.categoryName,
+    post.imageUrl,
+    post.publicId,
+  ]);
+
   const { theme, setTheme } = useTheme();
 
   if (theme === "dark") {
@@ -57,19 +82,6 @@ export default function CreatePostForm() {
   if (theme === "light") {
     document.documentElement.setAttribute("data-color-mode", "light");
   }
-
-  console.log(theme);
-
-  useEffect(() => {
-    const fetchAllCategories = async () => {
-      const res = await fetch("api/categories");
-      const catNames = await res.json();
-      setCategories(catNames);
-    };
-
-    fetchAllCategories();
-  }, []);
-
   const handleImageUpload = (result: CldUploadWidgetResults) => {
     console.log("result: ", result);
     const info = result.info as object;
@@ -100,7 +112,7 @@ export default function CreatePostForm() {
     e.preventDefault();
 
     try {
-      const res = await fetch("/api/removeImage", {
+      const res = await fetch("api/removeImage", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ publicId }),
@@ -130,8 +142,8 @@ export default function CreatePostForm() {
 
     try {
       setIsSubmitting(true);
-      const res = await fetch("api/posts/", {
-        method: "POST",
+      const res = await fetch(`/api/posts/${post.id}`, {
+        method: "PUT",
         headers: {
           "Content-type": "application/json",
         },
@@ -148,7 +160,7 @@ export default function CreatePostForm() {
       if (res.ok) {
         toast({
           title: "Success 🎉",
-          description: "Your post has been created successfully",
+          description: "Your post has been updated successfully",
           className: "success-toast",
         });
         setIsSubmitting(false);
@@ -178,27 +190,19 @@ export default function CreatePostForm() {
             onChange={(e) => setTitle(e.target.value)}
             type="text"
             placeholder="Title"
+            value={title}
           />
           {/* <Textarea
             onChange={(e) => setContent(e.target.value)}
             placeholder="Content"
+            value={content}
           ></Textarea> */}
-          <div
-            // document.documentElement.setAttribute('data-color-mode', 'dark')
-            // document.documentElement.setAttribute('data-color-mode', 'light')
-            data-color={theme}
-          >
-            <div>
-              <MDEditor
-                value={content}
-                onChange={(e) => setContent(e || "")}
-                className="min-h-[500px]"
-              />
-            </div>
-            {/* <MDEditor.Markdown
-              source={content}
-              style={{ whiteSpace: "pre-wrap" }}
-            /> */}
+          <div>
+            <MDEditor
+              value={content}
+              onChange={(e) => setContent(e || "")}
+              className="min-h-[500px] "
+            />
           </div>
 
           {links &&
@@ -263,21 +267,27 @@ export default function CreatePostForm() {
           )}
 
           {/* <select
-          onChange={(e) => setSelectedCategory(e.target.value)}
-          className="p-3 rounded-md border appearance-none"
-        >
-          <option value="">Select A Category</option>
-          {categories &&
-            categories.map((category) => (
-              <option key={category.id} value={category.categoryName}>
-                {category.categoryName}
-              </option>
-            ))}
-        </select> */}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="p-3 rounded-md border appearance-none"
+              >
+                <option value="">Select A Category</option>
+                {categories &&
+                  categories.map((category) => (
+                    <option key={category.id} value={category.categoryName}>
+                      {category.categoryName}
+                    </option>
+                  ))}
+              </select> */}
 
-          <Select onValueChange={setSelectedCategory}>
+          <Select
+            onValueChange={setSelectedCategory}
+            defaultValue={post.categoryName}
+          >
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Select A Category" />
+              <SelectValue
+                placeholder="Select A Category"
+                defaultValue={post.categoryName}
+              />
             </SelectTrigger>
             <SelectContent>
               {categories &&
@@ -292,15 +302,13 @@ export default function CreatePostForm() {
           </Select>
 
           <Button
-            className={` font-bold  ${
+            className={`primary-btn font-bold ${
               isSubmitting && `opacity-50 cursor-not-allowed`
-            }
-            `}
+            }`}
             type="submit"
             variant={"default"}
-            disabled={isSubmitting}
           >
-            Create Post
+            Edit Post
           </Button>
         </form>
       </div>

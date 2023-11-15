@@ -51,7 +51,8 @@ export default async function page({ params }: { params: { id: string } }) {
   console.log(post);
 
   return (
-    <Container>
+    // <Container>
+    <div>
       {post && (
         <div className="pb-10 ">
           <PostDetail post={post} />
@@ -65,6 +66,7 @@ export default async function page({ params }: { params: { id: string } }) {
           </Button>
         </Container>
       )}
-    </Container>
+      {/* </Container> */}
+    </div>
   );
 }

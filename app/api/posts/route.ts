@@ -13,7 +13,10 @@ export async function GET() {
                 category: true
             },
             orderBy : {
-                createdAt : 'desc'
+                //  order by createdAt and updatedAt in descending order
+                
+                updatedAt : "desc"
+                
             }
         })
 

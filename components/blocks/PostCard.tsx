@@ -130,7 +130,7 @@ export default async function PostCard({ post }: { post: TPost }) {
               </Link>
             </Button>
           </div>
-          <div className="absolute top-10 right-0 p-2 transition-transform transform group-hover:translate-x-0 translate-x-full">
+          <div className="absolute top-12 right-0 p-2 transition-transform transform group-hover:translate-x-0 translate-x-full">
             <DeleteButton id={post.id} />
           </div>
         </>

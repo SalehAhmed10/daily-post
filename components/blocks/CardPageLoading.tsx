@@ -14,19 +14,19 @@ export default function CardPageLoading() {
           >
             <div className="animate-pulse flex flex-col space-x-4">
               {/*card image pulse */}
-              <div className="rounded-md bg-foreground/60 h-48 w-full"></div>
+              <div className="rounded-md bg-primary h-48 w-full"></div>
               {/*card content pulse */}
 
               <div className="flex-1 space-y-4 py-5">
-                <div className="h-4 bg-foreground/60 rounded w-3/4"></div>
+                <div className="h-4 bg-primary rounded w-3/4"></div>
                 <div className="space-y-2">
-                  <div className="h-4 bg-foreground/60 rounded"></div>
-                  <div className="h-4 bg-foreground/60 rounded w-5/6"></div>
+                  <div className="h-4 bg-primary rounded"></div>
+                  <div className="h-4 bg-primary rounded w-5/6"></div>
                 </div>
 
                 <div className="flex justify-between">
-                  <div className="h-4 bg-foreground/60 rounded w-1/4"></div>
-                  <div className="h-4 bg-foreground/60 rounded w-1/4"></div>
+                  <div className="h-4 bg-primary rounded w-1/4"></div>
+                  <div className="h-4 bg-primary rounded w-1/4"></div>
                 </div>
               </div>
             </div>

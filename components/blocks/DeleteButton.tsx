@@ -4,10 +4,19 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useToast } from "../ui/use-toast";
+import { useState } from "react";
 
-export default function DeleteButton({ id }: { id: string }) {
+export default function DeleteButton({
+  id,
+  btnVariant,
+}: {
+  id: string;
+  btnVariant?: string;
+}) {
   const router = useRouter();
   const { toast } = useToast();
+
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = async () => {
     const confimed = window.confirm(
@@ -15,6 +24,7 @@ export default function DeleteButton({ id }: { id: string }) {
     );
 
     if (confimed) {
+      setIsDeleting(true);
       try {
         const res = await fetch(`/api/posts/${id}`, {
           method: "DELETE",
@@ -27,9 +37,13 @@ export default function DeleteButton({ id }: { id: string }) {
             description: "Your post has been deleted successfully.",
             className: "success-toast",
           });
+          setIsDeleting(false);
           router.refresh();
+          router.push("/");
         }
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     } else {
       return;
     }
@@ -39,9 +53,11 @@ export default function DeleteButton({ id }: { id: string }) {
     <>
       <Button
         size="icon"
-        variant="default"
-        className="text-2xl"
+        variant={btnVariant ? (btnVariant as any) : "default"}
+        className={`text-lg ${isDeleting && "opacity-50 cursor-not-allowed"}`}
         onClick={handleDelete}
+        disabled={isDeleting}
+        tabIndex={-1}
       >
         <GoTrash />
         <span className="sr-only">Edit Post</span>

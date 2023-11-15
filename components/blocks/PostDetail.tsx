@@ -2,21 +2,25 @@
 
 // post detail with breadcrumb and edit button
 
-import { Fragment } from "react";
-
 import { TPost } from "@/types/types";
 import Image from "next/image";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "../ui/tooltip";
+// import {
+//   Tooltip,
+//   TooltipContent,
+//   TooltipProvider,
+//   TooltipTrigger,
+// } from "../ui/tooltip";
 import { Button } from "../ui/button";
 import { MdEditNote } from "react-icons/md";
 import NoThumbnail from "@/public/no-thumbnail.webp";
-import { useRouter } from "next/navigation";
+
 import Link from "next/link";
+
+import MDEditor from "@uiw/react-md-editor";
+
+import Container from "../ui/container";
+import DeleteButton from "./DeleteButton";
+import { useSession } from "next-auth/react";
 
 interface PostDetailProps {
   post: TPost;
@@ -37,6 +41,21 @@ export const PostDetail = ({ post }: PostDetailProps) => {
 
   // console.log(post);
 
+  // const { theme, setTheme } = useTheme();
+
+  // if (theme === "dark") {
+  //   document.documentElement.setAttribute("data-color-mode", "dark");
+  // }
+  // if (theme === "light") {
+  //   document.documentElement.setAttribute("data-color-mode", "light");
+  // }
+
+  const { data: session, status } = useSession();
+
+  const isAuthor = session?.user?.email === authorEmail;
+
+  // console.log(session?.user?.email);
+
   return (
     <>
       <div className="p-4 flex-1 flex flex-col py-5 ">
@@ -44,81 +63,108 @@ export const PostDetail = ({ post }: PostDetailProps) => {
           <Image
             src={imageUrl ? imageUrl : NoThumbnail}
             alt="Blog image"
-            className="w-full h-[50vh] object-cover rounded-lg hover:scale-105 transition duration-500 ease-in-out transform hover:shadow-2xl"
+            className="w-full h-[500px] rounded-lg hover:scale-105 transition duration-500 ease-in-out transform hover:shadow-2xl "
             height={1000}
             style={{
-              aspectRatio: "500/300",
+              aspectRatio: "16/9",
               objectFit: "cover",
             }}
             width={1000}
           />
         </div>
+        <Container>
+          <div className="flex flex-col pt-5 gap-5 ">
+            <div className="title ">
+              <h1 className="text-2xl font-semibold text-justify ">{title}</h1>
+            </div>
+            <div className="flex justify-between">
+              <div className="flex items-center space-x-2 text-sm ">
+                <span aria-hidden="true">-</span>
+                <time dateTime={createdAt}>
+                  {new Date(createdAt).toLocaleDateString()}
+                </time>
+              </div>
 
-        <div className="flex flex-col pt-5 gap-5 ">
-          <div className="title ">
-            <h1 className="text-2xl font-semibold text-justify  ">{title}</h1>
+              <div className="flex items-center gap-1">
+                <Image
+                  src={author?.image}
+                  alt={author.name}
+                  width={100}
+                  height={100}
+                  className="w-8 h-8 rounded-full"
+                />
+
+                <p>{author?.name}</p>
+              </div>
+            </div>
+            {isAuthor && (
+              <div className="flex gap-2">
+                <Button size="default" variant="default" className="" asChild>
+                  <Link
+                    href={`/edit-post/${post.id}`}
+                    tabIndex={-1}
+                    className="flex items-center "
+                  >
+                    <span className="text-2xl">
+                      <MdEditNote />
+                    </span>
+                    Edit Post
+                    <span className="sr-only">Edit Post</span>
+                  </Link>
+                </Button>
+
+                <DeleteButton id={post.id} btnVariant={"destructive"} />
+              </div>
+            )}
+
+            <hr className="border-gray-300 dark:border-gray-600" />
           </div>
 
-          <div className="flex justify-between">
-            <div className="flex items-center space-x-2 text-sm ">
-              <span aria-hidden="true">&middot;</span>
-              <time dateTime={createdAt}>
-                {new Date(createdAt).toLocaleDateString()}
-              </time>
-            </div>
-
-            <div className="flex items-center gap-1">
-              <Image
-                src={author?.image}
-                alt={author.name}
-                width={100}
-                height={100}
-                className="w-8 h-8 rounded-full"
-              />
-
-              <p>{author?.name}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* <div className="flex items-center space-x-2 text-sm text-gray-500">
+          {/* <div className="flex items-center space-x-2 text-sm text-gray-500">
           <p>{author?.email}</p>
           <span aria-hidden="true">&middot;</span>
           <time dateTime={createdAt}>
             {new Date(createdAt).toLocaleDateString()}
           </time>
         </div> */}
-
+          {/* 
         <div className="flex-1 my-5">
           <p className="text-gray-600 dark:text-gray-400">{content}</p>
-        </div>
+        </div> */}
 
-        {/* links exists or null */}
-        {links && links.length > 0 ? (
-          <div className="flex flex-col gap-2">
-            <h3 className="text-xl font-semibold">Links</h3>
-            <ul className="flex flex-col gap-2">
-              {links.map((link, index) => (
-                <li key={index}>
-                  <Link
-                    href={link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-500 hover:underline"
-                  >
-                    {link}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : (
-          <p>
-            <span className="text-gray-600 dark:text-gray-400">
-              No links added
-            </span>
-          </p>
-        )}
+          <MDEditor.Markdown
+            source={content}
+            style={{ whiteSpace: "normal" }}
+            className="px-0 md:px-5 py-5 editor-viewer "
+          />
+          {/* <Markdown>{content}</Markdown> */}
+          {/* links exists or null */}
+          {links && links.length > 0 ? (
+            <div className="flex flex-col gap-2 mt-5">
+              <h3 className="text-xl font-semibold">Links</h3>
+              <ul className="flex flex-col gap-2">
+                {links.map((link, index) => (
+                  <li key={index}>
+                    <Link
+                      href={link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500 hover:underline"
+                    >
+                      {link}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <p>
+              <span className="text-gray-600 dark:text-gray-400">
+                No links added
+              </span>
+            </p>
+          )}
+        </Container>
       </div>
     </>
   );
