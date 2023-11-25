@@ -181,7 +181,7 @@ export default function EditPostForm({ post }: { post: TPost }) {
   return (
     <div className="create-form flex flex-col justify-around ">
       <div className="h-[100px] flex items-center justify-center">
-        <h2 className="text-2xl font-bold mb-4 ">Create Post</h2>
+        <h2 className="text-2xl font-bold mb-4 ">Edit This Post</h2>
       </div>
 
       <div>
