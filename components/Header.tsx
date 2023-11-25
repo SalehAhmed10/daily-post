@@ -95,7 +95,7 @@ export default function Header() {
               </SheetContent>
             </Sheet> */}
             <Link href={`/`} className="">
-              <h1 className="text-xl font-bold">Daily Post</h1>
+              <h1 className="text-xl font-bold">Daily Post FT</h1>
             </Link>
           </div>
           <nav className="mx-6 md:flex items-center space-x-4 lg:space-x-6 hidden ">
