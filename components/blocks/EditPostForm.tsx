@@ -24,8 +24,13 @@ import {
 } from "../ui/select";
 import { Button } from "../ui/button";
 import Image from "next/image";
+import "@uiw/react-md-editor/markdown-editor.css";
+import "@uiw/react-markdown-preview/markdown.css";
 import MDEditor from "@uiw/react-md-editor";
 import { useTheme } from "next-themes";
+
+// import "@uiw/react-markdown-editor/markdown-editor.css";
+import "@uiw/react-markdown-preview/markdown.css";
 
 export default function EditPostForm({ post }: { post: TPost }) {
   const [links, setLinks] = useState<string[]>([]);
@@ -179,7 +184,7 @@ export default function EditPostForm({ post }: { post: TPost }) {
   };
 
   return (
-    <div className="create-form flex flex-col justify-around ">
+    <div className="create-form flex flex-col justify-around px-5 pb-10">
       <div className="h-[100px] flex items-center justify-center">
         <h2 className="text-2xl font-bold mb-4 ">Edit This Post</h2>
       </div>

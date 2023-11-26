@@ -123,13 +123,13 @@
   :root {
     --text-light: 0, 3%, 82%;
     --background: 0 0% 100%;
-    --foreground: 205, 30%, 4.9%;
+    --foreground: 240, 10%, 4%;
 
     --card: 0 0% 100%;
-    --card-foreground: 205, 30%, 4.9%;
+    --card-foreground: 240, 10%, 4%;
  
     --popover: 0 0% 100%;
-    --popover-foreground: 205, 30%, 4.9%;
+    --popover-foreground: 240, 10%, 4%;
  
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
@@ -148,21 +148,21 @@
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 205, 30%, 4.9%;
+    --ring: 240, 10%, 4%;
  
     --radius: 0.5rem;
   }
  
   .dark {
-    --background: 205, 30%, 4.9%;
+    --background: 240, 10%, 4%;
  
 
     --foreground: 210 40% 98%;
  
-    --card: 205, 30%, 4.9%;
+    --card: 240, 10%, 4%;
     --card-foreground: 210 40% 98%;
  
-    --popover: 205, 30%, 4.9%;
+    --popover: 240, 10%, 4%;
     --popover-foreground: 210 40% 98%;
  
     --primary: 210 40% 98%;

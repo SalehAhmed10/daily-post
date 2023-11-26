@@ -34,6 +34,7 @@ import { useTheme } from "next-themes";
 
 // import "@uiw/react-markdown-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
+import rehypeSanitize from "rehype-sanitize";
 
 export default function CreatePostForm() {
   const [links, setLinks] = useState<string[]>([]);
@@ -167,8 +168,8 @@ export default function CreatePostForm() {
   };
 
   return (
-    <div className="create-form flex flex-col justify-around ">
-      <div className="h-[100px] flex items-center justify-center">
+    <div className="create-form flex flex-col justify-around px-5 pb-10">
+      <div className="h-[100px] flex items-center justify-center ">
         <h2 className="text-2xl font-bold mb-4 ">Create Post</h2>
       </div>
 
@@ -193,6 +194,9 @@ export default function CreatePostForm() {
                 value={content}
                 onChange={(e) => setContent(e || "")}
                 className="min-h-[500px]"
+                previewOptions={{
+                  rehypePlugins: [rehypeSanitize],
+                }}
               />
             </div>
             {/* <MDEditor.Markdown
