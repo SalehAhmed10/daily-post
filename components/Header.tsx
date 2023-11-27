@@ -83,24 +83,22 @@ export default function Header() {
     >
       <Container>
         <div className="relative px-4   flex  items-center justify-between w-full">
-          <div className="flex items-center">
-            <Link href={`/`} className="flex items-center">
-              <div className="w-[100px] h-[50px] ">
-                <Image
-                  src={DarkLogo}
-                  alt="Logo"
-                  width={100}
-                  height={100}
-                  className="dark:hidden h-auto w-auto logo"
-                />
-                <Image
-                  src={LightLogo}
-                  alt="Logo"
-                  width={100}
-                  height={100}
-                  className="hidden dark:block h-auto w-auto logo"
-                />
-              </div>
+          <div className="flex items-center w-[100px] h-[50px]">
+            <Link href={`/`} className="flex items-center ">
+              <Image
+                src={DarkLogo}
+                alt="Logo"
+                width={100}
+                height={100}
+                className="dark:hidden h-auto w-auto logo"
+              />
+              <Image
+                src={LightLogo}
+                alt="Logo"
+                width={100}
+                height={100}
+                className="hidden dark:block h-auto w-auto logo"
+              />
 
               {/* <h1 className="text-xl font-bold">Daily Post</h1> */}
             </Link>
