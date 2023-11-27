@@ -26,11 +26,17 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
-import MDEditor from "@uiw/react-md-editor";
+
 import { useTheme } from "next-themes";
+
+const MDEditor = dynamic(() => import("@uiw/react-md-editor"), {
+  ssr: false,
+});
 
 // import "@uiw/react-markdown-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
+import dynamic from "next/dynamic";
+import rehypeSanitize from "rehype-sanitize";
 
 export default function EditPostForm({ post }: { post: TPost }) {
   const [links, setLinks] = useState<string[]>([]);
@@ -207,6 +213,12 @@ export default function EditPostForm({ post }: { post: TPost }) {
               value={content}
               onChange={(e) => setContent(e || "")}
               className="min-h-[500px] "
+              style={{ whiteSpace: "normal" }}
+              maxHeight={1000}
+              enableScroll={true}
+              previewOptions={{
+                rehypePlugins: [rehypeSanitize],
+              }}
             />
           </div>
 

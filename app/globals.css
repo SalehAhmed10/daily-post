@@ -38,64 +38,29 @@
   color: white;
 }
 
-.editor-viewer{
+/* color: var(--foreground) !important; */
+/* .wmde-markdown{
   background-color: transparent !important;
-  color: var(--foreground) !important;
-}
-
-/* html.dark > .editor-viewer > .wmde-markdown pre {
-  font-size: 85%;
-  line-height: 1.45;
-  background-color: #15803D;
-  border-radius: 6px;
-} */
-/* @media (prefers-color-scheme: light){
-  .wmde-markdown pre {
-    font-size: 85%;
-    line-height: 1.45;
-    background-color: var(--color-canvas-subtle);
-    border-radius: 6px;
-    color: whitesmoke !important;
-}
-    
+  font-family: 'Inter', sans-serif !important;
 } */
 
+/* // wmde-markdown > table all content text color */
 /* @media (prefers-color-scheme: dark){
-  .wmde-markdown pre {
-    font-size: 85%;
-    line-height: 1.45; */
-    /* background-color: var(--); */
-    /* border-radius: 6px;
-    color: whitesmoke !important;
-}
+  .wmde-markdown table > tbody > tr > td, .wmde-markdown table > tbody > tr > th, .wmde-markdown table > thead > tr > td, .wmde-markdown table > thead > tr > th {
+    color: var(--background) !important;
+  }
 } */
 
-/* @media (prefers-color-scheme: light){
-  .wmde-markdown pre {
-    font-size: 85%;
-    line-height: 1.45;
-    background-color: #f44336 !important;
-    border-radius: 6px;
-    color: whitesmoke !important;
-}
-} */
-/* 
-@media (prfers-color-scheme: dark){
-  .wmde-markdown code, .wmde-markdown tt {
-    padding: 0.2em 0.4em;
-    margin: 0;
-    font-size: 85%;
-    background-color: var(--color-neutral-muted);
-    border-radius: 6px;
-}
-} */
+
+
+
 
   /* // code and blockquote inside .wmde-markdown backgroud color red */
-  .wmde-markdown code, .wmde-markdown tt,  .wmde-markdown pre {
-    /* background-color: var(--secondary); */
+  /* background-color: var(--card-foreground) !important; */
+  /* background-color: var(--secondary); */
+  /* .wmde-markdown code, .wmde-markdown tt,  .wmde-markdown pre {
     background-color: #161B22 !important;
     color: tomato !important;
-    /* background-color: var(--card-foreground) !important; */
     border-radius: 6px;
 }
 
@@ -104,13 +69,62 @@
   background-color: var(--secondary) !important;
   color: tomato !important;
   border-radius: 6px;
-}
+} */
+
+
 
 .main-tag{
   /* force take full height of the page  */
   /* my header height is 70px and footer is 70px */
   min-height: calc(100vh - 140px);
   
+}
+
+
+
+.wmde-markdown {
+  background-color: transparent !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 16px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  color:  var(--foreground) !important;
+}
+
+
+
+
+.light > .wmde-markdown tt,  .wmde-markdown pre {
+  
+  color: wheat !important;
+}
+
+.light .wmde-markdown table > tbody > tr > td{
+  color: black !important;
+}
+
+.light .wmde-markdown table > tbody > tr > td{
+  color: black !important;
+}
+
+
+/* background-color: var(--color-canvas-default); */
+
+.light  .w-md-editor-preview tt, .w-md-editor-preview pre {
+  background-color: #161B22 !important;
+}
+
+.dark .w-md-editor-preview tt, .w-md-editor-preview pre {
+  background-color: #161B22 !important;
+}
+
+
+.light .wmde-markdown table > tbody > tr > td, .wmde-markdown table > thead > tr > th {
+  color: white !important;
+}
+
+.dark .wmde-markdown table > tbody > tr > td {
+  color: white !important;
 }
 
 

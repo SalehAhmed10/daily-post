@@ -1,15 +1,8 @@
 "use client";
 
-// post detail with breadcrumb and edit button
-
 import { TPost } from "@/types/types";
 import Image from "next/image";
-// import {
-//   Tooltip,
-//   TooltipContent,
-//   TooltipProvider,
-//   TooltipTrigger,
-// } from "../ui/tooltip";
+
 import { Button } from "../ui/button";
 import { MdEditNote } from "react-icons/md";
 import NoThumbnail from "@/public/no-thumbnail.webp";
@@ -21,7 +14,12 @@ import MDEditor from "@uiw/react-md-editor";
 import Container from "../ui/container";
 import DeleteButton from "./DeleteButton";
 import { useSession } from "next-auth/react";
+import "@uiw/react-markdown-preview/markdown.css";
+import "@uiw/react-markdown-editor/markdown-editor.css";
+import "@uiw/react-md-editor/markdown-editor.css";
+import "@uiw/react-markdown-preview/markdown.css";
 
+import MarkdownPreview from "@uiw/react-markdown-preview";
 interface PostDetailProps {
   post: TPost;
 }
@@ -132,10 +130,10 @@ export const PostDetail = ({ post }: PostDetailProps) => {
           <p className="text-gray-600 dark:text-gray-400">{content}</p>
         </div> */}
 
-          <MDEditor.Markdown
+          <MarkdownPreview
             source={content}
             style={{ whiteSpace: "normal" }}
-            className="px-0 md:px-5 py-5 editor-viewer "
+            className="px-0 md:px-5 py-5 "
           />
           {/* <Markdown>{content}</Markdown> */}
           {/* links exists or null */}
