@@ -173,7 +173,7 @@ export default function CreatePostForm() {
   };
 
   return (
-    <div className="create-form flex flex-col justify-around ">
+    <div className="create-form flex flex-col justify-around px-5 pb-10">
       <div className="h-[100px] flex items-center justify-center">
         <h2 className="text-2xl font-bold mb-4 ">Create Post</h2>
       </div>

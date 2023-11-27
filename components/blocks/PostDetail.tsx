@@ -9,12 +9,12 @@ import NoThumbnail from "@/public/no-thumbnail.webp";
 
 import Link from "next/link";
 
-import MDEditor from "@uiw/react-md-editor";
+// import MDEditor from "@uiw/react-md-editor";
 
 import Container from "../ui/container";
 import DeleteButton from "./DeleteButton";
 import { useSession } from "next-auth/react";
-import "@uiw/react-markdown-preview/markdown.css";
+
 import "@uiw/react-markdown-editor/markdown-editor.css";
 import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
