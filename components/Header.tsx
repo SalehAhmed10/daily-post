@@ -13,8 +13,8 @@ import { useSession } from "next-auth/react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
-import DarkLogo from "@/public/assets/logob.png";
-import LightLogo from "@/public/assets/logow.png";
+import LightLogo from "@/public/logow.png";
+import DarkLogo from "@/public/logob.png";
 
 const routes = [
   {
@@ -40,15 +40,7 @@ export default function Header() {
   const { data: session, status } = useSession();
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // if theme is dark then show black logo else show white logo
   const { theme, setTheme } = useTheme();
-  // console.log(theme);
-  // let logo = "";
-  // if (theme === "dark") {
-  //   logo = "/assets/logow.png";
-  // } else {
-  //   logo = "/assets/logob.png";
-  // }
 
   useEffect(() => {
     const handleScroll = () => {
