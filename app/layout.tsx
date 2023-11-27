@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
-import { Inter, Balsamiq_Sans } from "next/font/google";
 import "./globals.css";
+import type { Metadata } from "next";
+// import { Inter } from "next/font/google";
+import { Balsamiq_Sans } from "next/font/google";
 import ThemeProvider from "@/context/ThemeProvider";
 import Header from "@/components/Header";
 import { switchThemeDuration } from "@/constants/page";
@@ -9,10 +10,11 @@ import { NextAuthProvider } from "../components/Providers";
 import { Toaster } from "@/components/ui/toaster";
 import { Analytics } from "@vercel/analytics/react";
 
-const inter = Inter({ subsets: ["latin"] });
-const balsamiqSans = Balsamiq_Sans({
-  subsets: ["latin"],
+// const inter = Inter({ subsets: ["latin"] });
+const balsamiq_sans = Balsamiq_Sans({
   weight: ["400", "700"],
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -34,7 +36,7 @@ export default function RootLayout({
         // className={`${inter.className} min-h-screen flex flex-col transition-colors ${switchThemeDuration}`}
 
         // className={`${inter.className} min-h-screen flex flex-col `}
-        className={`${balsamiqSans.className} min-h-screen flex flex-col `}
+        className={`${balsamiq_sans.className} min-h-screen flex flex-col `}
       >
         <ThemeProvider
           attribute="class"

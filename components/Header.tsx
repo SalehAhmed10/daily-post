@@ -11,10 +11,10 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { cn } from "@/lib/utils";
-
 import Image from "next/image";
-import LOGOW from "@/public/LOGO_W.png";
-import LOGOB from "@/public/LOGO_B.png";
+
+import DarkLogo from "@/public/assets/logob.png";
+import LightLogo from "@/public/assets/logow.png";
 
 const routes = [
   {
@@ -40,6 +40,16 @@ export default function Header() {
   const { data: session, status } = useSession();
   const [isScrolled, setIsScrolled] = useState(false);
 
+  // if theme is dark then show black logo else show white logo
+  const { theme, setTheme } = useTheme();
+  // console.log(theme);
+  // let logo = "";
+  // if (theme === "dark") {
+  //   logo = "/assets/logow.png";
+  // } else {
+  //   logo = "/assets/logob.png";
+  // }
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -51,12 +61,6 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // wait for theme to be loaded before rendering the header to avoid flash of light theme on dark theme
-  // const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
-  // useEffect(() => setMounted(true), []);
-  // if (!mounted) return null;
 
   return (
     //     `sm:flex sm:justify-between py-3   h-[90px]  flex items-center sticky top-0 z-50 backdrop-filter backdrop-blur-lg bg-opacity-60 dark:bg-opacity-60 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100
@@ -80,30 +84,23 @@ export default function Header() {
       <Container>
         <div className="relative px-4   flex  items-center justify-between w-full">
           <div className="flex items-center">
-            {/* <Sheet>
-              <SheetTrigger>
-                <Menu className="h-6 w-6 md:hidden" />
-              </SheetTrigger>
-              <SheetContent side={"left"} className="w-[300px] sm:w-[400px]">
-                <nav className="flex flex-col gap-4 ">
-                  {routes.map((route, i) => (
-                    <Link
-                      href={route.href}
-                      className="block px-2 py-1 text-lg "
-                      key={i}
-                    >
-                      {route.label}
-                    </Link>
-                  ))}
-                </nav>
-              </SheetContent>
-            </Sheet> */}
             <Link href={`/`} className="flex items-center">
-              {theme === "dark" ? (
-                <Image src={LOGOW} alt="logo" width={100} height={100} />
-              ) : (
-                <Image src={LOGOB} alt="logo" width={100} height={100} />
-              )}
+              <div className="w-[100px] h-[50px] ">
+                <Image
+                  src={DarkLogo}
+                  alt="Logo"
+                  width={100}
+                  height={100}
+                  className="dark:hidden h-auto w-auto logo"
+                />
+                <Image
+                  src={LightLogo}
+                  alt="Logo"
+                  width={100}
+                  height={100}
+                  className="hidden dark:block h-auto w-auto logo"
+                />
+              </div>
 
               {/* <h1 className="text-xl font-bold">Daily Post</h1> */}
             </Link>
