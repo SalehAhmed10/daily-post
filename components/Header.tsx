@@ -12,6 +12,10 @@ import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { cn } from "@/lib/utils";
 
+import Image from "next/image";
+import LOGOW from "@/public/LOGO_W.png";
+import LOGOB from "@/public/LOGO_B.png";
+
 const routes = [
   {
     href: "/",
@@ -94,8 +98,14 @@ export default function Header() {
                 </nav>
               </SheetContent>
             </Sheet> */}
-            <Link href={`/`} className="">
-              <h1 className="text-xl font-bold">Daily Post</h1>
+            <Link href={`/`} className="flex items-center">
+              {theme === "dark" ? (
+                <Image src={LOGOW} alt="logo" width={100} height={100} />
+              ) : (
+                <Image src={LOGOB} alt="logo" width={100} height={100} />
+              )}
+
+              {/* <h1 className="text-xl font-bold">Daily Post</h1> */}
             </Link>
           </div>
           <nav className="mx-6 md:flex items-center space-x-4 lg:space-x-6 hidden ">

@@ -134,6 +134,14 @@ export const PostDetail = ({ post }: PostDetailProps) => {
             source={content}
             style={{ whiteSpace: "normal" }}
             className="px-0 md:px-5 py-5 "
+            components={{
+              // add blank target to all links
+              a({ node, ...props }) {
+                return (
+                  <a {...props} target="_blank" rel="noopener noreferrer" />
+                );
+              },
+            }}
           />
           {/* <Markdown>{content}</Markdown> */}
           {/* links exists or null */}

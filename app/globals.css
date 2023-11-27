@@ -84,13 +84,19 @@
 
 .wmde-markdown {
   background-color: transparent !important;
-  font-family: 'Inter', sans-serif !important;
+  /* font-family: 'Inter', sans-serif !important; */
+  font-family: 'Balsamiq Sans', sans-serif;
   font-size: 16px;
   line-height: 1.5;
   word-wrap: break-word;
   color:  var(--foreground) !important;
 }
 
+.w-md-editor-preview{
+  /* font-family: 'Inter', sans-serif !important; */
+
+  font-family: 'Balsamiq Sans', sans-serif;
+}
 
 
 

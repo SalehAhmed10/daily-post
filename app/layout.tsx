@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Balsamiq_Sans } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/context/ThemeProvider";
 import Header from "@/components/Header";
@@ -10,6 +10,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
+const balsamiqSans = Balsamiq_Sans({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 export const metadata: Metadata = {
   title: {
@@ -29,7 +33,8 @@ export default function RootLayout({
       <body
         // className={`${inter.className} min-h-screen flex flex-col transition-colors ${switchThemeDuration}`}
 
-        className={`${inter.className} min-h-screen flex flex-col `}
+        // className={`${inter.className} min-h-screen flex flex-col `}
+        className={`${balsamiqSans.className} min-h-screen flex flex-col `}
       >
         <ThemeProvider
           attribute="class"
